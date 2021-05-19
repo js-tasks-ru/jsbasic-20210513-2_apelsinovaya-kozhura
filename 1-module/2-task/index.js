@@ -1,7 +1,7 @@
 /**
  * Эту функцию трогать не нужно
  */
- function print(text) {
+function print(text) {
   console.log(text);
 }
 
