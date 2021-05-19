@@ -1,7 +1,7 @@
 /**
  * Эту функцию трогать не нужно
  */
-function print(text) {
+ function print(text) {
   console.log(text);
 }
 
@@ -11,6 +11,11 @@ function print(text) {
  */
 function isValid(name) {
   // ваш код...
+  if(typeof name === 'string'  && name.indexOf(' ') === -1 && name.length >= 4) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function sayHello() {
