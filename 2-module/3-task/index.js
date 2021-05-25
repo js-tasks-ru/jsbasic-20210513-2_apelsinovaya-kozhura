@@ -1,5 +1,4 @@
 let calculator = {
-  // ваш код
   read(a, b){
     this.a = a;
     this.b = b;
