@@ -6,20 +6,22 @@ function initCarousel() {
   let arrowLeft = document.querySelector('.carousel__arrow_left');
   let currentSlide = 1;
   arrowLeft.style.display = 'none';
-
   arrowRight.onclick = function () {
-    carousel.style.transform += `translateX(-${widthImage}px)`;
     currentSlide++;
+    carousel.style.transform = `translateX(-${
+      widthImage * (currentSlide - 1)
+    }px)`;
     if (currentSlide == 4) {
       arrowRight.style.display = 'none';
     } else {
       arrowLeft.style.display = '';
     }
   };
-
   arrowLeft.onclick = function () {
-    carousel.style.transform += `translateX(${widthImage}px)`;
     currentSlide--;
+    carousel.style.transform = `translateX(-${
+      widthImage * (currentSlide - 1)
+    }px)`;
     if (currentSlide == 1) {
       arrowLeft.style.display = 'none';
     } else {
