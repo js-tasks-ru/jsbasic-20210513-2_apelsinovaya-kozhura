@@ -33,15 +33,15 @@ export default class StepSlider {
       }
     }
   }
-
-  onClick(event) {
-    let left = event.clientX - this.elem.getBoundingClientRect().left;
-    let leftRelative = left / this.elem.offsetWidth;
-    let segments = this.steps - 1;
-    
-    let value = Math.round(leftRelative * segments);
-    let valuePercents = (value / segments) * 100;
-
+  changeProgress(progress) {
+    let progressElementRef = this.elem.querySelector('.slider__progress');
+    progressElementRef.style.width = `${progress}%`;
+  }
+  changeValue(value) {
+    let thumb = this.elem.querySelector('.slider__thumb');
+    thumb.style.left = `${value}%`;
+  }
+  changeActiveStep(value) {
     let sliderValue = this.elem.querySelector('.slider__value');
     sliderValue.textContent = value;
 
@@ -50,15 +50,27 @@ export default class StepSlider {
 
     let sliderSteps = this.elem.querySelector('.slider__steps');
     sliderSteps.children[value].classList.add('slider__step-active');
+  }
+  calculateValues(left) {
+    let leftRelative = left / this.elem.offsetWidth;
+    let segments = this.steps - 1;
 
-    let thumb = this.elem.querySelector('.slider__thumb');
-    thumb.style.left = `${valuePercents}%`;
+    let value = Math.round(leftRelative * segments);
+    let valuePercents = (value / segments) * 100;
+    return { value, valuePercents };
+  }
+  onClick(event) {
+    let left = event.clientX - this.elem.getBoundingClientRect().left;
+    let values = this.calculateValues(left);
 
-    let progress = this.elem.querySelector('.slider__progress');
-    progress.style.width = `${valuePercents}%`;
+    this.changeActiveStep(values.value);
+
+    this.changeValue(values.valuePercents);
+
+    this.changeProgress(values.valuePercents);
 
     let sliderChange = new CustomEvent('slider-change', {
-      detail: value,
+      detail: values.value,
       bubbles: true,
     });
     this.elem.dispatchEvent(sliderChange);
