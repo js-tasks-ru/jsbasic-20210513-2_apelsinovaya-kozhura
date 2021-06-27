@@ -4,18 +4,20 @@ export default class StepSlider {
     this.value = value;
     this.elem = document.createElement('div');
     this.elem.classList.add('slider');
-    this.elem.addEventListener('click', (event) => this.onClick(event));
     this.makeStepSlider();
-    this.pointerEvents();
   }
 
   makeStepSlider() {
-    this.elem.innerHTML = `<div class="slider__thumb">
-    <span class="slider__value">0</span>
+    this.elem.innerHTML = `<div class="slider__thumb" style="left:${
+      (this.value * 100) / (this.steps - 1)
+    }%">
+    <span class="slider__value">${this.value}</span>
   </div>
 
   <!--Полоска слайдера-->
-  <div class="slider__progress" style="width: 0%"></div>
+  <div class="slider__progress" style="width: ${
+    (this.value * 100) / (this.steps - 1)
+  }%"></div>
 
   <!-- Шаги слайдера (вертикальные чёрточки) -->
   <div class="slider__steps">
@@ -34,6 +36,8 @@ export default class StepSlider {
         sliderSteps.insertAdjacentHTML('beforeend', `<span></span>`);
       }
     }
+    this.elem.addEventListener('click', (event) => this.onClick(event));
+    this.pointerEvents();
   }
 
   pointerEvents() {
