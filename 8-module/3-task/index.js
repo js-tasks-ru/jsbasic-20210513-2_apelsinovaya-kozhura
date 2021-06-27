@@ -54,6 +54,7 @@ export default class Cart {
     }
 
     return price;
+
   }
 
   onProductUpdate(cartItem) {
@@ -62,3 +63,4 @@ export default class Cart {
     this.cartIcon.update(this);
   }
 }
+

@@ -35,6 +35,7 @@ export default class Cart {
       }
     }
     this.onProductUpdate(cartItem);
+
   }
 
   isEmpty() {
@@ -62,7 +63,10 @@ export default class Cart {
 
   renderProduct(product, count) {
     return createElement(`
-    <div class="cart-product" data-product-id="${product.id}">
+
+    <div class="cart-product" data-product-id="${
+      product.id
+    }">
       <div class="cart-product__img">
         <img src="/assets/images/products/${product.image}" alt="product">
       </div>
@@ -212,3 +216,4 @@ export default class Cart {
     this.cartIcon.elem.onclick = () => this.renderModal();
   }
 }
+
